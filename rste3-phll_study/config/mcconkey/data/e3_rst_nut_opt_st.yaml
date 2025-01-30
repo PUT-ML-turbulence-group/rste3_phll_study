@@ -1,0 +1,32 @@
+_target_: lightning.datamodule.IrrepDataModule
+batch_size: 64
+datasets:
+  train:
+    cases:
+      -   name: phll
+          variant: 0p5
+      -   name: phll
+          variant: 1p0
+      -   name: phll
+          variant: 1p5
+  val:
+    cases:
+      -   name: phll
+          variant: 0p8
+  test:
+    cases:
+      -   name: phll
+          variant: 1p2
+attributes: [k, gradU, v, antiK, antiP]
+labels: [optEddyViscosity]
+data_scaler:
+  _target_: lightning.data_structures.preprocessing.EquivariantScalerWrap
+  scaler_backbone:
+    _target_: sklearn.preprocessing.StandardScaler
+label_scaler:
+  _target_: lightning.data_structures.preprocessing.EquivariantScalerWrap
+  scaler_backbone:
+    _target_: sklearn.preprocessing.StandardScaler
+
+defaults:
+  - datafiles: phll

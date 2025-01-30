@@ -1,0 +1,17 @@
+To train the e3nn turbulence models (e3TM-rperp for optimal anisotropy, e3TM-nut for optimal eddy viscosity),
+run the main_hydra.py script with appropriate configuration file. Two configs are prepared in this version of the project, inside the "config" directory.
+
+The configuration files refer to the data, model, score function etc. Moreover, "injection" parameter specifies how the OpenFOAM file shall be created. This file can be later used as input data for a RANS simulation.
+
+Data setup:
+To provide the data, rename the directory "data_template" to "data". Inside "data/mcconkey/cfd_dataset", there is a link to a turbulence modeling database by McConkey. Copy the appropriate subdirectory of this database to "data/mcconkey/cfd_dataset".
+
+
+The following files contain other functionalities:
+
+
+learning_T9.ipynb:
+learning_T9.ipynb is a fully self-contained notebook for the supplementary synthetic experiment mentioned in the article. It also provides a convenient overview of how the e3nn architecture for turbulence data is constructed. 
+
+post_train_hydra.py:
+post_train_hydra.py script can be used to test the already-trained model, predict turbulence, and inject it into the template. All those steps are performed by the main script if config includes the injection, but this script allows to conveniently ignore the training part.

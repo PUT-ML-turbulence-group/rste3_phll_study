@@ -1,0 +1,3 @@
+_target_: lightning.model_backbones.e3_models.TurbulenceNN
+
+hidden_irreps: "32x0e + 32x1e + 32x1o + 32x2e"

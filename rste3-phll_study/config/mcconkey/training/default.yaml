@@ -1,0 +1,9 @@
+trainer:
+    max_epochs: 1000
+    gpus: 1
+    progress_bar_refresh_rate: 100
+
+batch_size: 512
+lr: 0.001
+weight_decay: 1.0e-05
+

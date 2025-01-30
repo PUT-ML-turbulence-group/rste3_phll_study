@@ -1,0 +1,61 @@
+datapath: ${oc.env:PROJECT_ROOT}/data/mcconkey/CFD_Dataset
+additional_datapath: ${oc.env:PROJECT_ROOT}/data/mcconkey/additional_data
+turbulence_name: kepsilonphitf
+fields:
+  k:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_k.npy'}
+    type: TensorData.load
+  S:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_S.npy'}
+    type: TensorData.load
+  gradU:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradU.npy'}
+    type: TensorData.load
+  v:
+    path:
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Ux.npy'}
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Uy.npy'}
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Uz.npy'}
+    type: TensorData.stack
+  gradK:
+    path:
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradkx.npy'}
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradky.npy'}
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradkz.npy'}
+    type: TensorData.stack
+  gradP:
+    path:
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradpx.npy'}
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradpy.npy'}
+      - ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_gradpz.npy'}
+    type: TensorData.stack
+  antiK:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Ak.npy'}
+    type: TensorData
+  antiP:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Ap.npy'}
+    type: TensorData
+  popeInvariants:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Lambda.npy'}
+    type: TensorData.pope_invariants
+  popeTensors:
+    path: ${fix_path:'${data.datafiles.datapath}/${data.datafiles.turbulence_name}/${data.datafiles.turbulence_name}_{CASE_NAME}_case_{case_type}_Tensors.npy'}
+    type: TensorData.pope_tensors
+
+  tauDNS:
+    path:
+      - ${fix_path:'${data.datafiles.datapath}/labels/{CASE_NAME}_case_{case_type}_tau.npy'}
+    type: TensorData
+  tauRANS:
+    path: ${fix_path:'${data.datafiles.additional_datapath}/{case_name}/tau_rans/case_{case_type}.npy'}
+    type: TensorData
+  optEddyViscosity:
+    path:
+      - ${fix_path:'${data.datafiles.datapath}/labels/{CASE_NAME}_case_{case_type}_tau.npy'}
+      - ${fix_path:'${data.datafiles.additional_datapath}/{case_name}/grad_u_dns/case_{case_type}.npy'}
+    type: TensorData.optimal_viscosity
+  optAnisotropy:
+    path:
+      - ${fix_path:'${data.datafiles.datapath}/labels/{CASE_NAME}_case_{case_type}_tau.npy'}
+      - ${fix_path:'${data.datafiles.additional_datapath}/{case_name}/grad_u_dns/case_{case_type}.npy'}
+    type: TensorData.anisotropic_part

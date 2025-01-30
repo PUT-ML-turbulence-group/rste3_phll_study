@@ -1,0 +1,1 @@
+A single, non-realizable point has been removed from 0p8 data. Here, a point high-fidelity DNS field has been removed accordingly.

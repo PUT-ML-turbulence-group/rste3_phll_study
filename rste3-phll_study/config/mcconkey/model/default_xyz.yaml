@@ -1,0 +1,14 @@
+_target_: lightning.pl_module.TurbulenceClosureWrap
+
+nn:
+  #_target_: lightning.model_backbones.e3_models.DeepRSTPredictorAct
+  _target_: lightning.model_backbones.e3_models.TurbulenceNN
+  #_target_: lightning.model_backbones.e3_models.ScalarTurbulenceNN
+  hidden_irreps: "32x0e + 32x1e + 32x1o + 32x2e"
+
+output_format: tensor
+loss_weights:
+  loss_xyz: 1.0
+  loss_xy: 0
+  loss_scalar: 0
+

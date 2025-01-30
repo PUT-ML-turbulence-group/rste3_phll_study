@@ -1,0 +1,36 @@
+resume_training: true
+series_name: l:xyz, anisotropy tensor
+
+hydra:
+  run:
+    dir: ${oc.env:PROJECT_ROOT}/out/mcconkey/phll_1p2_nut_opt_16
+
+defaults:
+  - data: e3_rst_nut_opt
+  - model: default_nut
+
+model:
+  nn:
+    hidden_irreps: "16x0e + 16x1e + 16x1o + 16x2e"
+
+# test different scaling for nut
+
+training:
+  trainer:
+      max_epochs: 1000
+      gpus: 1
+      progress_bar_refresh_rate: 50
+
+# test xy and xyz in training
+
+  batch_size: 512
+  lr: 1e-3
+  weight_decay: 1.0e-5
+
+# maybe test lower lr? (doesn't help on RFV, though)
+
+injection:
+  save_dir: ${oc.env:PROJECT_ROOT}/out/mcconkey/phll_1p2_nut_opt_16
+  save_name: nut_opt_out_16_nonneg
+  template_path: ${oc.env:PROJECT_ROOT}/config/mcconkey/templates/nut
+  non_negative: true

@@ -1,0 +1,34 @@
+_target_: lightning.datamodule.IrrepDataModule
+batch_size: 64
+datasets:
+  train:
+    cases:
+      -   name: DUCT
+          variant: 2205
+      -   name: DUCT
+          variant: 2600
+      -   name: DUCT
+          variant: 3200
+      -   name: DUCT
+          variant: 3500
+  val:
+    cases:
+      -   name: DUCT
+          variant: 2400
+  test:
+    cases:
+      -   name: DUCT
+          variant: 2900
+attributes: [k, gradU, v, antiK, antiP]
+labels: [optAnisotropy]
+data_scaler:
+  _target_: lightning.data_structures.preprocessing.EquivariantScalerWrap
+  scaler_backbone:
+    _target_: lightning.data_structures.preprocessing.MeanScaler
+label_scaler:
+  _target_: lightning.data_structures.preprocessing.EquivariantScalerWrap
+  scaler_backbone:
+    _target_: lightning.data_structures.preprocessing.MeanScaler
+
+defaults:
+  - datafiles: phll
